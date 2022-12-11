@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart' hide Page;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:provider/provider.dart';
-import 'package:system_theme/system_theme.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:window_manager/window_manager.dart';
@@ -35,13 +34,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // if it's not on the web, windows or android, load the accent color
-  if (!kIsWeb &&
-      [
-        TargetPlatform.windows,
-        TargetPlatform.android,
-      ].contains(defaultTargetPlatform)) {
-    SystemTheme.accentColor.load();
-  }
+  // if (!kIsWeb &&
+  //     [
+  //       TargetPlatform.windows,
+  //       TargetPlatform.android,
+  //     ].contains(defaultTargetPlatform)) {
+  //   SystemTheme.accentColor.load();
+  // }
 
   setPathUrlStrategy();
 
@@ -142,11 +141,11 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
   final searchController = TextEditingController();
 
   final List<NavigationPaneItem> originalItems = [
-    PaneItem(
-      icon: const Icon(FluentIcons.home),
-      title: const Text('Home'),
-      body: const HomePage(),
-    ),
+    // PaneItem(
+    //   icon: const Icon(FluentIcons.home),
+    //   title: const Text('Home'),
+    //   body: const HomePage(),
+    // ),
     PaneItemHeader(header: const Text('Inputs')),
     PaneItem(
       icon: const Icon(FluentIcons.button_control),

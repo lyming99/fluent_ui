@@ -346,7 +346,7 @@ class _AutoSuggestBoxState<T> extends State<AutoSuggestBox<T>> {
   final GlobalKey _textBoxKey = GlobalKey();
 
   late TextEditingController controller;
-  final FocusScopeNode overlayNode = FocusScopeNode();
+  final FocusScopeNode overlayNode = FocusScopeNode(canRequestFocus: true);
   final _focusStreamController = StreamController<int>.broadcast();
   final _dynamicItemsController =
       StreamController<List<AutoSuggestBoxItem<T>>>.broadcast();
@@ -430,7 +430,8 @@ class _AutoSuggestBoxState<T> extends State<AutoSuggestBox<T>> {
   void _handleFocusChanged() {
     final hasFocus = focusNode.hasFocus;
     if (!hasFocus) {
-      _dismissOverlay();
+      Future.delayed(const Duration(milliseconds: 100)).then((value) => _dismissOverlay());
+      // _dismissOverlay();
     } else {
       _showOverlay();
     }
@@ -451,7 +452,8 @@ class _AutoSuggestBoxState<T> extends State<AutoSuggestBox<T>> {
   }
 
   void _insertOverlay() {
-    _entry = OverlayEntry(builder: (context) {
+    _entry = OverlayEntry(
+        builder: (context) {
       assert(debugCheckHasMediaQuery(context));
 
       final boxContext = _textBoxKey.currentContext;
@@ -516,7 +518,7 @@ class _AutoSuggestBoxState<T> extends State<AutoSuggestBox<T>> {
     });
 
     if (_textBoxKey.currentContext != null) {
-      Overlay.of(context)?.insert(_entry!);
+      Overlay.of(context).insert(_entry!);
       if (mounted) setState(() {});
     }
   }
@@ -834,7 +836,9 @@ class _AutoSuggestBoxOverlayState<T> extends State<_AutoSuggestBoxOverlay<T>> {
                     return _AutoSuggestBoxOverlayTile(
                       text: item.child ?? Text(item.label),
                       selected: item._selected,
-                      onSelected: () => widget.onSelected(item),
+                      onSelected: () {
+                        widget.onSelected(item);
+                      },
                     );
                   },
                 );

@@ -368,6 +368,7 @@ class _CustomTrackShape extends m.RoundedRectSliderTrackShape {
     required Animation<double> enableAnimation,
     required TextDirection textDirection,
     required Offset thumbCenter,
+    Offset? secondaryOffset,
     bool isDiscrete = false,
     bool isEnabled = false,
     double additionalActiveTrackHeight = 0,
@@ -417,6 +418,7 @@ class SliderThumbShape extends m.SliderComponentShape {
   /// If no disabledRadius is provided, then it is equal to the
   /// [enabledThumbRadius]
   final double? disabledThumbRadius;
+
   double get _disabledThumbRadius => disabledThumbRadius ?? enabledThumbRadius;
 
   /// The resting elevation adds shadow to the unpressed thumb.
