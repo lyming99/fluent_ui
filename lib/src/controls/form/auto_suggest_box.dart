@@ -518,7 +518,7 @@ class _AutoSuggestBoxState<T> extends State<AutoSuggestBox<T>> {
     });
 
     if (_textBoxKey.currentContext != null) {
-      Overlay.of(context).insert(_entry!);
+      Overlay.of(context)?.insert(_entry!);
       if (mounted) setState(() {});
     }
   }
